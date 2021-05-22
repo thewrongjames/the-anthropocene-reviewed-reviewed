@@ -1,0 +1,19 @@
+.LoadingSpinner {
+  text-align: center;
+}
+
+.LoadingSpinner .spinner {
+  border: 0.5rem solid transparent;
+  border-top: 0.5rem solid white;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+	margin: auto;
+  animation: spin 1.5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

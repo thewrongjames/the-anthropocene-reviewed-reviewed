@@ -7,4 +7,6 @@ the human-centred planet on a five star scale.
 ## TODO
 
 - Delete the firebase functions, I don't think I actually need them?
+  - Oh, actually, I might need them for summarising review data for better less reads.
 - Update `App.test.tsx` to at least function.
+- Pagination.

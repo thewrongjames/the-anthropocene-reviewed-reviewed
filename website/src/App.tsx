@@ -27,6 +27,7 @@ export default function App () {
               of a podcast (or book) in which John Green reviews different
               facets of the human-centred world.
             </p>
+            <p><a href="#footer">Details / Disclaimer / About</a></p>
           </div>
         </header>
 
@@ -41,8 +42,9 @@ export default function App () {
           </Switch>
         </div>
 
-        <footer>
+        <footer id="footer">
           <div className="content">
+            <h2>Details / Disclaimer / About</h2>
             <p>
               This website is not associated with John Green, Hank Green of any
               of their companies or publishers or books or anything official
@@ -68,7 +70,7 @@ export default function App () {
               thoroughly recommend checking that out regardless.
             </p>
             <hr></hr>
-            <p>
+            <p className="withLove">
               Made,
               with <span className="heart" role="img" aria-label="love">❤️</span>,
               by James Wright.

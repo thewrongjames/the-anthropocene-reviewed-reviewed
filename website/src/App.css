@@ -23,6 +23,9 @@
 
 .App footer {
   background-color: var(--darker-background-colour);
+}
+
+.App footer .withLove {
   text-align: center;
 }
 
