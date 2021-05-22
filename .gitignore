@@ -1,5 +1,3 @@
-# Dependencies.
 node_modules
-
-# Production.
 build
+firebase-debug.log
