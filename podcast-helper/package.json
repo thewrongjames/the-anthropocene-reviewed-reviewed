@@ -1,0 +1,13 @@
+{
+  "name": "podcast-helper",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "James",
+  "dependencies": {
+    "firebase-admin": "^9.8.0",
+    "rss-parser": "^3.12.0"
+  }
+}

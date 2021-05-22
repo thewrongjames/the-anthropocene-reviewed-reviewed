@@ -1,3 +1,6 @@
 node_modules
 build
 firebase-debug.log
+
+# Really definitely do not let the service key get commited.
+*service*key*
