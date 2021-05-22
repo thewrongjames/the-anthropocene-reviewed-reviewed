@@ -6,7 +6,7 @@ service cloud.firestore {
     }
 
     match /reviewables/{guid} {
-      allow read: true
+      allow read: if true;
     }
   }
 }
