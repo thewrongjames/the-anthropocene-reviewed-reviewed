@@ -1,0 +1,26 @@
+:root {
+  --background-colour: #151C46;
+  --darker-background-colour: #151C32;
+  --main-text-colour: #C2C2C2;
+  --brighter-text-colour: #FFFFFF;
+  --highight-colour: #FD3CC7;
+}
+
+* {
+  box-sizing: border-box
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: var(--background-colour);
+  color: var(--main-text-colour);
+}
+
+h1, h2, h3, h4, h5, h6, b, strong {
+  color: var(--brighter-text-colour);
+}
+
+.highlighted, a {
+  color: var(--highight-colour)
+}

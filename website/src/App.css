@@ -1,0 +1,31 @@
+.App #topBar {
+  background-color: var(--darker-background-colour);
+}
+
+.App #topBar h1 {
+  margin: 0;
+}
+
+.App .homeLink {
+  text-decoration: none;
+  color: var(--brighter-text-colour)
+}
+
+.App footer {
+  background-color: var(--darker-background-colour);
+  text-align: center;
+}
+
+.App .content {
+  width: 70%;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 800px) {
+  .App .content {
+    width: 100%;
+    padding: 20px;
+  }
+}
