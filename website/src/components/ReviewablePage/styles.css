@@ -1,0 +1,39 @@
+.ReviewablePage form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ReviewablePage form > * {
+  width: 100%;
+  display: inline-block;
+}
+
+.ReviewablePage form label {
+  margin-bottom: 1rem;
+}
+
+.ReviewablePage form label:not(:first-child) {
+  margin-top: 2rem;
+}
+
+.ReviewablePage form Button {
+  margin-top: 2rem;
+}
+
+.ReviewablePage input, .ReviewablePage textarea {
+  background-color: var(--darker-background-colour);
+  color: var(--brighter-text-colour);
+  border: 1px solid white;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+
+.ReviewablePage input {
+  padding: 0.5rem;
+}
+
+.ReviewablePage textarea {
+  resize: vertical;
+  padding: 1rem;
+}

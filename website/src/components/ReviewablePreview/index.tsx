@@ -10,7 +10,10 @@ type Props = {
   showLinksToPage?: boolean
 }
 
-export default function ReviewablePreview ({ reviewable }: Props) {
+export default function ReviewablePreview ({
+  reviewable,
+  showLinksToPage
+}: Props) {
   return <div className="ReviewablePreview">
     <img src={reviewable.imageURL} alt={reviewable.title}></img>
     <div>
@@ -18,12 +21,14 @@ export default function ReviewablePreview ({ reviewable }: Props) {
       <p className="date">{reviewable.dateOfPublication.toLocaleDateString()}</p>
       <p>{reviewable.description}</p>
       <div className="buttonRow">
-        <Link to={`/${reviewable.guid}`}>
-          <Button>Write a Review</Button>
-        </Link>
-        <Link to={`/${reviewable.guid}`}>
-          <Button>View Reviews</Button>
-        </Link>
+        {showLinksToPage && <>
+          <Link to={`/${reviewable.guid}`}>
+            <Button>Write a Review</Button>
+          </Link>
+          <Link to={`/${reviewable.guid}`}>
+            <Button>View Reviews</Button>
+          </Link>
+        </>}
         <a href={reviewable.url} target="_blank" rel="noreferrer">
           <Button>Visit</Button>
         </a>

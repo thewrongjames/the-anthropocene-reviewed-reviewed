@@ -33,7 +33,7 @@ export default function App () {
 
         <div className="main content">
           <Switch>
-            <Route path="/:reviewableGUID">
+            <Route path="/:guid">
               <ReviewableOr404 />
             </Route>
             <Route path="/">
