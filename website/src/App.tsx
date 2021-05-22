@@ -30,7 +30,7 @@ export default function App () {
           </div>
         </header>
 
-        <div className="content">
+        <div className="main content">
           <Switch>
             <Route path="/">
               <List />
