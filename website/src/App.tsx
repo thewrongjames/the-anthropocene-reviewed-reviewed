@@ -32,11 +32,11 @@ export default function App () {
 
         <div className="main content">
           <Switch>
+            <Route path="/:reviewableGUID">
+              <ReviewableOr404 />
+            </Route>
             <Route path="/">
               <List />
-            </Route>
-            <Route path="/:reviewableID">
-              <ReviewableOr404 />
             </Route>
           </Switch>
         </div>
@@ -57,9 +57,9 @@ export default function App () {
             </p>
             <p>
               If I have gotten around to making it public by then, you may even
-              be able
-              to <a href="https://github.com/thewrongjames/the-anthropocene-reviewed-reviewed">
-              make a pull request on GitHub</a>
+              be able to make a pull request
+              on <a href="https://github.com/thewrongjames/the-anthropocene-reviewed-reviewed">
+              GitHub</a>
             </p>
             <p>
               In case you were wondering, this website is <em>also</em> not

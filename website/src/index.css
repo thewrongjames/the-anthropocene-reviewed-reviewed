@@ -3,7 +3,7 @@
   --darker-background-colour: #151C32;
   --main-text-colour: #C2C2C2;
   --brighter-text-colour: #FFFFFF;
-  --highight-colour: #FD3CC7;
+  --highlight-colour: #FD3CC7;
 }
 
 * {
@@ -22,5 +22,5 @@ h1, h2, h3, h4, h5, h6, b, strong {
 }
 
 .highlighted, a {
-  color: var(--highight-colour)
+  color: var(--highlight-colour)
 }

@@ -1,0 +1,13 @@
+.Button {
+  background-color: var(--highlight-colour);
+  color: var(--brighter-text-colour);
+  border: none;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.Button:hover {
+  background-color: var(--darker-background-colour);
+}

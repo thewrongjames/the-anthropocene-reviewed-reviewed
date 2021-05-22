@@ -1,0 +1,44 @@
+.ReviewablePreview {
+  display: grid;
+  grid-template-columns: 200px 3fr;
+  grid-gap: 1rem;
+}
+
+.ReviewablePreview:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.ReviewablePreview img {
+  width: 100%;
+}
+
+.ReviewablePreview .date {
+  font-family: monospace;
+  color: grey;
+}
+
+.ReviewablePreview .buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ReviewablePreview .buttonRow > * {
+  margin-top: 1rem;
+}
+
+.ReviewablePreview .buttonRow > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  .ReviewablePreview {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .ReviewablePreview h2 {
+    margin-top: 0;
+  }
+}
