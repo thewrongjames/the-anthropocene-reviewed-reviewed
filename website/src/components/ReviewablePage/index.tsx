@@ -3,6 +3,7 @@ import React from 'react'
 import Reviewable from '../../models/Reviewable'
 import ReviewablePreview from '../ReviewablePreview'
 import Button from '../Button'
+import Stars from '../Stars'
 
 import './styles.css'
 
@@ -22,7 +23,8 @@ export default function ReviewablePage ({ reviewable }: Props) {
       <label htmlFor="name">Name:</label>
       <input type="text" id="name" />
 
-      <p>Stars, somehow, go here.</p>
+      <label>Star rating:</label>
+      <Stars />
 
       <label htmlFor="review">Review:</label>
       <textarea id="review" />

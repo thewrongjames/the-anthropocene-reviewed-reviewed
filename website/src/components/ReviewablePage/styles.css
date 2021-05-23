@@ -3,11 +3,6 @@
   flex-direction: column;
 }
 
-.ReviewablePage form > * {
-  width: 100%;
-  display: inline-block;
-}
-
 .ReviewablePage form label {
   margin-bottom: 1rem;
 }
