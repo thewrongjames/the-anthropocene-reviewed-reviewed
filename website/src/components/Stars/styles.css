@@ -3,11 +3,18 @@
 }
 
 .Stars svg {
+  fill: grey;
+}
+
+.Stars div[data-checked="true"] svg {
+  fill: gold;
+}
+
+.Stars div[data-editable="true"] svg:hover {
   fill: white;
 }
 
 .Stars > div:nth-child(2n) svg {
-  fill: red;
   transform: scale(-1, 1);
 }
 
