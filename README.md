@@ -10,3 +10,4 @@ the human-centred planet on a five star scale.
   - Oh, actually, I might need them for summarising review data for better less reads.
 - Update `App.test.tsx` to at least function.
 - Pagination.
+- Probably change to `npm ci` rather than `npm install` in github action.
