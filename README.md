@@ -11,3 +11,4 @@ the human-centred planet on a five star scale.
 - Update `App.test.tsx` to at least function.
 - Pagination.
 - Probably change to `npm ci` rather than `npm install` in github action.
+- CAPTCHA, reCAPTCHA, hCAPTCHA, something to reduce spamability.

@@ -6,11 +6,12 @@ type Props = {
   children?: React.ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
   type?: 'submit' | 'reset' | 'button'
+  className?: string
 }
 
 export default function Button (props: Props) {
   return <button
-    className="Button"
+    className={'Button' + (props.className ? ' ' + props.className : '')}
     onClick={props.onClick}
     type={props.type || 'button'}
   >

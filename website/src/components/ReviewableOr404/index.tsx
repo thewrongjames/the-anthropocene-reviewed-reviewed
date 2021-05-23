@@ -44,14 +44,12 @@ export default function ReviewableOr404 () {
 
   if (isLoading) {
     return <div className="ReviewableOr404">
-      <p><Link to="/">Go back home</Link></p>
       <LoadingSpinner />
     </div>
   }
 
   if (reviewable) {
     return <div className="ReviewableOr404">
-      <p><Link to="/">Go back home</Link></p>
       <ReviewablePage reviewable={reviewable} />
     </div>
   }

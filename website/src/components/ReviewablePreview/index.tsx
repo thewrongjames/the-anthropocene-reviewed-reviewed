@@ -22,10 +22,10 @@ export default function ReviewablePreview ({
       <p>{reviewable.description}</p>
       <div className="buttonRow">
         {showLinksToPage && <>
-          <Link to={`/${reviewable.guid}`}>
+          <Link to={`/reviewables/${reviewable.guid}`}>
             <Button>Write a Review</Button>
           </Link>
-          <Link to={`/${reviewable.guid}`}>
+          <Link to={`/reviewables/${reviewable.guid}`}>
             <Button>View Reviews</Button>
           </Link>
         </>}

@@ -4,10 +4,11 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import List from './components/List'
+import ReviewableList from './components/ReviewableList'
 import ReviewableOr404 from './components/ReviewableOr404'
 
 import './App.css'
+import About from './components/About'
 
 export default function App () {
   return (
@@ -23,57 +24,42 @@ export default function App () {
               </Link>
             </h1>
             <p>
-              An unofficial website in which you can review different facets
-              of a podcast (or book) in which John Green reviews different
-              facets of the human-centred world.
+              An unofficial website in which you can review different facets of
+              podcast episodes (or of a book) in which John Green reviews
+              different facets of the human-centred world.
             </p>
-            <p><a href="#footer">Details / Disclaimer / About</a></p>
+            <p><Link to="/">Home</Link> | <Link to="/about">About</Link></p>
           </div>
         </header>
 
         <div className="main content">
           <Switch>
-            <Route path="/:guid">
+            <Route path="/reviewables/:guid">
               <ReviewableOr404 />
             </Route>
+            <Route path="/about">
+              <About />
+            </Route>
             <Route path="/">
-              <List />
+              <ReviewableList />
             </Route>
           </Switch>
         </div>
 
         <footer id="footer">
           <div className="content">
-            <h2>Details / Disclaimer / About</h2>
-            <p>
-              This website is not associated with John Green, Hank Green of any
-              of their companies or publishers or books or anything official
-              like that at all.
-            </p>
-            <p>
-              If you notice any issues with the website (or, say, <em>are John
-              Green</em> and want to ask that the site be modified or taken down
-              (to which I would of course comply)) feel free to reach out to me
-              on <a href="https://twitter.com/thewrongjames">Twitter</a> or
-              through <a href="mailto:hello@jameswright.me">email</a>.
-            </p>
-            <p>
-              If I have gotten around to making it public by then, you may even
-              be able to make a pull request
-              on <a href="https://github.com/thewrongjames/the-anthropocene-reviewed-reviewed">
-              GitHub</a>
-            </p>
-            <p>
-              In case you were wondering, this website is <em>also</em> not
-              associated with <a href="https://theanthropocenereviewed.com/">
-              that other awesome fan project website</a>, but, you know, I
-              thoroughly recommend checking that out regardless.
-            </p>
+            <p><Link to="/">Home</Link> | <Link to="/about">About</Link></p>
             <hr></hr>
             <p className="withLove">
               Made,
               with <span className="heart" role="img" aria-label="love">❤️</span>,
-              by James Wright.
+              by <a
+                href="https://twitter.com/thewrongjames"
+                target="_blank"
+                rel="noreferrer"
+              >
+                James Wright
+              </a>.
             </p>
           </div>
         </footer>

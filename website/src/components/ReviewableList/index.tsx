@@ -6,7 +6,7 @@ import Reviewable, { reviewableSchema } from '../../models/Reviewable'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import ReviewablePreview from '../ReviewablePreview'
 
-export default function List () {
+export default function ReviewableList () {
   const [reviewables, setReviewables] = useState<Reviewable[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -28,7 +28,7 @@ export default function List () {
             // The parse failed for some reason, log the error, but otherwise
             // just move on for now unfortunately.
             console.error(
-              'List failed to parse firestore reviewables:',
+              'ReviewableList failed to parse firestore reviewables:',
               error.message
             )
           }
@@ -40,7 +40,7 @@ export default function List () {
     []
   )
 
-  return <div className="List">
+  return <div className="ReviewableList">
     {isLoading && <LoadingSpinner />}
     {!isLoading && reviewables.map(reviewable => {
       return <ReviewablePreview

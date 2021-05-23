@@ -1,0 +1,38 @@
+.ReviewList .review {
+  border: solid 1px white;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.ReviewList h3 {
+  margin: 0;
+}
+
+.ReviewList .date {
+  font-family: monospace;
+  color: grey;
+  font-size: 1rem;
+}
+
+.ReviewList .reviewHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ReviewList .reviewHeading > * {
+  margin-bottom: 1rem;
+}
+
+.ReviewList .nameAndDate {
+  margin-right: 1rem;
+}
+
+.ReviewList .reviewText {
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: var(--darker-background-colour);
+  width: 100%;
+  padding: 1rem;
+}
