@@ -1,3 +1,7 @@
+import { collection, doc, getDocs, query, where } from '@firebase/firestore'
+import { useEffect } from 'react'
+
+import db from '../../firestoreDB'
 import Review from '../../models/Review'
 import Reviewable from '../../models/Reviewable'
 import Stars from '../Stars'
@@ -24,10 +28,22 @@ type Props = {
 }
 
 export default function ReviewList ({ reviewable }: Props) {
-  console.log(reviewable)
+  useEffect(
+    () => {
+      const reviewableReference = doc(db, 'reviewables', reviewable.guid)
+      const reviewsReference = collection(db, 'reviews')
+      const reviewsQuery = query(reviewsReference, where('someReference', '==', reviewableReference))
+      getDocs(reviewsQuery).then(querySnapshot => {
+        console.log(querySnapshot.size)
+        querySnapshot.forEach(document => {
+          console.log(document.data())
+        })
+      })
+    }
+  )
 
   return <div className="ReviewList">
-    {reviews.map(review => <div className="review">
+    {reviews.map((review, index) => <div className="review" key={index}>
       <div className="reviewHeading">
         <div className="nameAndDate">
           <h3>{review.name}</h3>

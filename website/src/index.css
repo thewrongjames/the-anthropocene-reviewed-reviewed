@@ -4,6 +4,7 @@
   --main-text-colour: #C2C2C2;
   --brighter-text-colour: #FFFFFF;
   --highlight-colour: #FD3CC7;
+  --disabled-highlight-colour: #926;
 }
 
 * {

@@ -7,6 +7,7 @@ type Props = {
   onClick?: MouseEventHandler<HTMLButtonElement>
   type?: 'submit' | 'reset' | 'button'
   className?: string
+  disabled?: boolean
 }
 
 export default function Button (props: Props) {
@@ -14,6 +15,7 @@ export default function Button (props: Props) {
     className={'Button' + (props.className ? ' ' + props.className : '')}
     onClick={props.onClick}
     type={props.type || 'button'}
+    disabled={props.disabled}
   >
     {props.children}
   </button>

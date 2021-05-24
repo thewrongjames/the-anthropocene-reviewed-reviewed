@@ -1,22 +1,22 @@
-.ReviewablePage form {
+.ReviewForm {
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
 }
 
-.ReviewablePage form label {
+.ReviewForm label {
   margin-bottom: 1rem;
 }
 
-.ReviewablePage .labelAndCounterContainer:not(:first-child) {
+.ReviewForm .labelAndCounterContainer:not(:first-child) {
   margin-top: 2rem;
 }
 
-.ReviewablePage form Button {
+.ReviewForm .Button, .ReviewForm .LoadingSpinner {
   margin-top: 2rem;
 }
 
-.ReviewablePage input, .ReviewablePage textarea {
+.ReviewForm input, .ReviewForm textarea {
   background-color: var(--darker-background-colour);
   color: var(--brighter-text-colour);
   border: 1px solid white;
@@ -25,17 +25,21 @@
   font-size: 1rem;
 }
 
-.ReviewablePage input {
+.ReviewForm input:disabled, .ReviewForm textarea:disabled {
+  color: grey;
+}
+
+.ReviewForm input {
   padding: 0.5rem;
 }
 
-.ReviewablePage textarea {
+.ReviewForm textarea {
   resize: vertical;
   padding: 1rem;
   height: 15rem;
 }
 
-.ReviewablePage .labelAndCounterContainer {
+.ReviewForm .labelAndCounterContainer {
   display: flex;
   justify-content: space-between;
 }

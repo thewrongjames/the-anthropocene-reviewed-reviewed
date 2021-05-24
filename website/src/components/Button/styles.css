@@ -11,3 +11,9 @@
 .Button:hover {
   background-color: var(--darker-background-colour);
 }
+
+.Button:disabled {
+  background-color: var(--disabled-highlight-colour);
+  color: grey;
+  cursor: auto;
+}

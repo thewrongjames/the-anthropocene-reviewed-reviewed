@@ -4,10 +4,14 @@ import { Link, useParams } from 'react-router-dom'
 
 import db from '../../firestoreDB'
 import Reviewable, { reviewableSchema } from '../../models/Reviewable'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../LoadingSpinner'
 import ReviewablePage from '../ReviewablePage'
 
-export default function ReviewableOr404 () {
+type Props = {
+  reviewing?: boolean
+}
+
+export default function ReviewableOr404 ({ reviewing }: Props) {
   const { guid } = useParams<{guid: string}>()
 
   const [reviewable, setReviewable] = useState<Reviewable | undefined>()
@@ -50,7 +54,7 @@ export default function ReviewableOr404 () {
 
   if (reviewable) {
     return <div className="ReviewableOr404">
-      <ReviewablePage reviewable={reviewable} />
+      <ReviewablePage reviewable={reviewable} reviewing={!!reviewing} />
     </div>
   }
 

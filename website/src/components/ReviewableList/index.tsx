@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import db from '../../firestoreDB'
 import Reviewable, { reviewableSchema } from '../../models/Reviewable'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../LoadingSpinner'
 import ReviewablePreview from '../ReviewablePreview'
 
 export default function ReviewableList () {
@@ -46,7 +46,8 @@ export default function ReviewableList () {
       return <ReviewablePreview
         key={reviewable.guid}
         reviewable={reviewable}
-        showLinksToPage
+        showLinkToPage
+        showLinkToMakeReview
       />
     })}
   </div>

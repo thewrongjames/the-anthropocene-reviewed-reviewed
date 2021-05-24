@@ -8,5 +8,9 @@ service cloud.firestore {
     match /reviewables/{guid} {
       allow read: if true;
     }
+
+    match /reviews/{id} {
+      allow read: if true;
+    }
   }
 }

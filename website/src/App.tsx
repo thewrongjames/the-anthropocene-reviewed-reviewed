@@ -34,6 +34,9 @@ export default function App () {
 
         <div className="main content">
           <Switch>
+            <Route path="/reviewables/:guid/review">
+              <ReviewableOr404 reviewing />
+            </Route>
             <Route path="/reviewables/:guid">
               <ReviewableOr404 />
             </Route>
