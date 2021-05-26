@@ -16,6 +16,10 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "predeploy": [
+      "npm --prefix \"website\" run lint",
+      "npm --prefix \"website\" run build"
+    ],
     "rewrites": [
       {
         "source": "**",

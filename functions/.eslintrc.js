@@ -2,29 +2,44 @@ module.exports = {
   root: true,
   env: {
     es6: true,
-    node: true,
+    node: true
   },
   extends: [
-    "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "google",
-    "plugin:@typescript-eslint/recommended",
+    'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'google',
+    'plugin:@typescript-eslint/recommended',
+    'standard'
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ["tsconfig.json", "tsconfig.dev.json"],
-    sourceType: "module",
+    sourceType: 'module'
   },
   ignorePatterns: [
-    "/lib/**/*", // Ignore built files.
+    '/lib/**/*' // Ignore built files.
   ],
   plugins: [
-    "@typescript-eslint",
-    "import",
+    '@typescript-eslint',
+    'import'
   ],
-  rules: {
-    quotes: ["error", "double"],
-  },
-};
+  overrides: [
+    {
+      files: [
+        '**/*.ts',
+        '**/*.js'
+      ],
+      rules: {
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': [
+          'error'
+        ],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error'
+        ]
+      }
+    }
+  ]
+}

@@ -1,9 +1,8 @@
-import * as functions from "firebase-functions";
+import * as functions from 'firebase-functions'
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+// This exists as a https function so that the reviews can be validated before
+// being written in.
+export const postReview = functions.https.onRequest((request, response) => {
+  functions.logger.info('Hello logs!', { structuredData: true })
+  response.send('Hello from Firebase!')
+})
