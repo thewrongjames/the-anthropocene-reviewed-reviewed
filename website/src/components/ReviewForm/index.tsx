@@ -1,4 +1,7 @@
+import { addDoc, collection } from '@firebase/firestore'
 import React, { useState } from 'react'
+import { Redirect } from 'react-router'
+import db from '../../firestoreDB'
 
 import Reviewable from '../../models/Reviewable'
 import StarRating from '../../models/StarRating'
@@ -19,16 +22,37 @@ type Props = {
 export default function ReviewForm ({ reviewable }: Props) {
   const [name, setName] = useState('')
   const [starRating, setStarRating] = useState(StarRating.TwoAndAHalf)
-  const [review, setReview] = useState('')
+  const [reviewText, setReviewText] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [didError, setDidError] = useState(false)
 
-  const onSubmit: React.FormEventHandler = (event) => {
+  // Pretty confident that this is not the best way to do this...
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+
+  const onSubmit: React.FormEventHandler = async (event) => {
     event.preventDefault()
     setIsLoading(true)
-    console.log('TODO: Actually submit.')
+    setDidError(false)
+
+    try {
+      await addDoc(collection(db, 'reviews'), {
+        name,
+        starRating,
+        reviewText,
+        dateOfCreation: new Date(),
+        reviewableGUID: reviewable.guid
+      })
+      setShouldRedirect(true)
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+      setDidError(true)
+    }
   }
 
   return <form onSubmit={onSubmit} className="ReviewForm">
+    {shouldRedirect && <Redirect to={'/reviewables/' + reviewable.guid} />}
+
     <div className="labelAndCounterContainer">
       <label htmlFor="reviewNameInput">Name:</label>
       <span>{name.length} / {maxNameCharacters}</span>
@@ -55,12 +79,12 @@ export default function ReviewForm ({ reviewable }: Props) {
 
     <div className="labelAndCounterContainer">
       <label htmlFor="reviewTextInput">Review:</label>
-      <span>{review.length} / {maxReviewCharacters}</span>
+      <span>{reviewText.length} / {maxReviewCharacters}</span>
     </div>
     <textarea
       id="reviewTextInput"
-      value={review}
-      onChange={event => setReview(event.target.value)}
+      value={reviewText}
+      onChange={event => setReviewText(event.target.value)}
       maxLength={maxReviewCharacters}
       minLength={1}
       required
@@ -72,5 +96,9 @@ export default function ReviewForm ({ reviewable }: Props) {
         ? <LoadingSpinner />
         : <Button type='submit'>Submit</Button>
     }
+
+    {didError && <p className="errorMessage">
+      Sorry, something went wrong. Please try again later.
+    </p>}
   </form>
 }

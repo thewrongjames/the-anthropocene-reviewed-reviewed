@@ -43,3 +43,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.ReviewForm .errorMessage {
+  color: orange;
+  margin: 0;
+  margin-top: 2rem;
+  text-align: center
+}

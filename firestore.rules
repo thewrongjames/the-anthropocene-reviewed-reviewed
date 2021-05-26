@@ -11,6 +11,38 @@ service cloud.firestore {
 
     match /reviews/{id} {
       allow read: if true;
+      allow create: if
+      	// Must contain only exactly the desired properties, and they must have
+        // exactly the desired types.
+      	request.resource.data.name is string
+        && request.resource.data.starRating is number
+        && request.resource.data.reviewText is string
+        && request.resource.data.dateOfCreation is timestamp
+        && request.resource.data.reviewableGUID is string
+        && request.resource.data.size() == 5
+
+        // name must be between 1 and 100 characters, inclusive.
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+
+        // starRating must be a valid rating that is it must be an
+        // increment of 0.5 between 0.5 and 5, inclusive.
+        && request.resource.data.starRating in [
+          0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5
+        ]
+
+        // reviewText must be between 1 and 5000 characters, inclusive.
+        && request.resource.data.reviewText.size() > 0
+        && request.resource.data.reviewText.size() <= 5000
+
+        // dateOfCreation must be the same day as the day the request was
+        // received. Not prefect but hopefully this will do.
+        && request.resource.data.dateOfCreation.date() == request.time.date()
+
+        // reviewableGUID must be refer to an existing reviewable.
+        && exists(/databases/$(database)/documents/reviewables/$(
+          request.resource.data.reviewableGUID
+        ))
     }
   }
 }
