@@ -12,10 +12,11 @@ import { useEffect, useState } from 'react'
 import db from '../../firestoreDB'
 import Reviewable, { reviewableSchema } from '../../models/Reviewable'
 import atBottomOfPage from '../../utilities/atBottomOfPage'
+import FilterInput from '../FilterInput'
 import LoadingSpinner from '../LoadingSpinner'
 import ReviewablePreview from '../ReviewablePreview'
 
-const reviewablesPerPage = 10
+const reviewablesPerPage = 2
 
 const baseReviewablesQuery = query(
   collection(db, 'reviewables'),
@@ -45,6 +46,7 @@ export default function ReviewableList () {
   const [isLoading, setIsLoading] = useState(true)
   const [lastReviewable, setLastReviewable] =
     useState<QueryDocumentSnapshot<unknown>>()
+  const [filterString, setFilterString] = useState('')
 
   // Get the first reviewables.
   useEffect(
@@ -98,22 +100,39 @@ export default function ReviewableList () {
         setIsLoading(false)
       }
 
+      // This is so that after loading some we always load more if we aren't at
+      // the bottom yet.
+      getNextReviewables()
+
       window.addEventListener('scroll', getNextReviewables)
 
       return () => window.removeEventListener('scroll', getNextReviewables)
     },
-    [isLoading, lastReviewable, reviewables]
+    [isLoading, lastReviewable, reviewables, filterString]
   )
 
   return <div className="ReviewableList">
-    {reviewables.map(reviewable => {
-      return <ReviewablePreview
-      key={reviewable.guid}
-      reviewable={reviewable}
-      showLinkToPage
-      showLinkToMakeReview
-      />
-    })}
+    <FilterInput
+      filterString={filterString}
+      setFilterString={setFilterString}
+      placeholder="Filter reviewables by title or description..."
+    />
+    {
+      reviewables
+        .filter(reviewable => {
+          const lowerFilter = filterString.toLowerCase()
+          return reviewable.title.toLowerCase().includes(lowerFilter) ||
+            reviewable.description.toLowerCase().includes(lowerFilter)
+        })
+        .map(reviewable => {
+          return <ReviewablePreview
+          key={reviewable.guid}
+          reviewable={reviewable}
+          showLinkToPage
+          showLinkToMakeReview
+          />
+        })
+    }
     {isLoading && <LoadingSpinner />}
   </div>
 }

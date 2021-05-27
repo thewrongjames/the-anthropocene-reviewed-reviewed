@@ -15,6 +15,7 @@ import db from '../../firestoreDB'
 import Review, { reviewSchema } from '../../models/Review'
 import Reviewable from '../../models/Reviewable'
 import atBottomOfPage from '../../utilities/atBottomOfPage'
+import FilterInput from '../FilterInput'
 import LoadingSpinner from '../LoadingSpinner'
 import Stars from '../Stars'
 
@@ -53,6 +54,7 @@ export default function ReviewList ({ reviewable }: Props) {
   const [isLoading, setIsLoading] = useState(true)
   const [reviews, setReviews] = useState<Review[]>([])
   const [lastReview, setLastReview] = useState<QueryDocumentSnapshot<unknown>>()
+  const [filterString, setFilterString] = useState('')
 
   // Get the first reviews.
   useEffect(
@@ -111,32 +113,47 @@ export default function ReviewList ({ reviewable }: Props) {
         setIsLoading(false)
       }
 
+      getNextReviews()
+
       window.addEventListener('scroll', getNextReviews)
 
       return () => window.removeEventListener('scroll', getNextReviews)
     },
-    [isLoading, lastReview, reviews, reviewable]
+    [isLoading, lastReview, reviews, reviewable, filterString]
   )
 
   return <div className="ReviewList">
+    <FilterInput
+      filterString={filterString}
+      setFilterString={setFilterString}
+      placeholder="Filter reviews by name or review content..."
+    />
     {!isLoading && reviews.length === 0 && <p>
       There aren't any reviews yet. Perhaps you'd like
       to <Link to={`/reviewables/${reviewable.guid}/review`}>add one</Link>?
     </p>}
-    {reviews.map((review, index) =>
-      <div className="review" key={index}>
-        <div className="reviewHeading">
-          <div className="nameAndDate">
-            <h3>{review.name}</h3>
-            <span className="date">{review.dateOfCreation.toLocaleString()}</span>
+    {
+      reviews
+        .filter(review => {
+          const lowerFilter = filterString.toLowerCase()
+          return review.name.toLowerCase().includes(lowerFilter) ||
+            review.reviewText.toLowerCase().includes(lowerFilter)
+        })
+        .map((review, index) =>
+          <div className="review" key={index}>
+            <div className="reviewHeading">
+              <div className="nameAndDate">
+                <h3>{review.name}</h3>
+                <span className="date">{review.dateOfCreation.toLocaleString()}</span>
+              </div>
+              <Stars rating={review.starRating} />
+              <div className="reviewText">
+                <span>{review.reviewText}</span>
+              </div>
+            </div>
           </div>
-          <Stars rating={review.starRating} />
-          <div className="reviewText">
-            <span>{review.reviewText}</span>
-          </div>
-        </div>
-      </div>
-    )}
+        )
+    }
     {isLoading && <LoadingSpinner />}
   </div>
 }

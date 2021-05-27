@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
+// import { useFirestoreEmulator } from 'firebase/firestore'
 
 // Setup firebase
 initializeApp({
@@ -9,5 +10,6 @@ initializeApp({
 })
 
 const db = getFirestore()
+// useFirestoreEmulator(db, 'localhost', 8080)
 
 export default db

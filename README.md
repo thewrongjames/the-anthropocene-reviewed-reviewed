@@ -12,5 +12,5 @@ the human-centred planet on a five star scale.
   - Okay, no, they cost money. Let's stick to free and totally spamable.
   - Guess that means no summaries. Oh well. That's fine for an MVP.
 - Update `App.test.tsx` to at least function.
-- Pagination.
 - Probably change to `npm ci` rather than `npm install` in github action.
+- Develop a proper way to toggle emulator use.
