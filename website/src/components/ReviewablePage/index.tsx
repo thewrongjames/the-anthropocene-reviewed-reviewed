@@ -3,6 +3,8 @@ import ReviewablePreview from '../ReviewablePreview'
 import ReviewForm from '../ReviewForm'
 import ReviewList from '../ReviewList'
 
+import './styles.css'
+
 type Props = {
   reviewable: Reviewable,
   reviewing: boolean

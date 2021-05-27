@@ -113,6 +113,8 @@ export default function ReviewList ({ reviewable }: Props) {
         setIsLoading(false)
       }
 
+      // This is so that after loading some we always load more if we aren't at
+      // the bottom yet.
       getNextReviews()
 
       window.addEventListener('scroll', getNextReviews)

@@ -4,8 +4,8 @@
   grid-gap: 1rem;
 }
 
-.ReviewablePreview:not(:last-child) {
-  margin-bottom: 2rem;
+.ReviewablePreview {
+  margin: 2rem 0;
 }
 
 .ReviewablePreview img {
