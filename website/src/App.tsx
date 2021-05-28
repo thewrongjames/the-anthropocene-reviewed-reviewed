@@ -9,6 +9,7 @@ import ReviewableOr404 from './components/ReviewableOr404'
 
 import './App.css'
 import About from './components/About'
+import NotFound from './components/NotFound'
 
 export default function App () {
   return (
@@ -42,6 +43,9 @@ export default function App () {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/:otherwise">
+              <NotFound />
             </Route>
             <Route path="/">
               <ReviewableList />

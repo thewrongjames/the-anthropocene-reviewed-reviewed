@@ -1,10 +1,11 @@
 import { doc, getDoc } from '@firebase/firestore'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import db from '../../firestoreDB'
 import Reviewable, { reviewableSchema } from '../../models/Reviewable'
 import LoadingSpinner from '../LoadingSpinner'
+import NotFound from '../NotFound'
 import ReviewablePage from '../ReviewablePage'
 
 type Props = {
@@ -46,21 +47,13 @@ export default function ReviewableOr404 ({ reviewing }: Props) {
     [guid]
   )
 
-  if (isLoading) {
-    return <div className="ReviewableOr404">
-      <LoadingSpinner />
-    </div>
-  }
-
-  if (reviewable) {
-    return <div className="ReviewableOr404">
-      <ReviewablePage reviewable={reviewable} reviewing={!!reviewing} />
-    </div>
+  let content = <NotFound />
+  if (isLoading) content = <LoadingSpinner />
+  if (reviewable !== undefined) {
+    content = <ReviewablePage reviewable={reviewable} reviewing={!!reviewing} />
   }
 
   return <div className="ReviewableOr404">
-    <h2>Not Found</h2>
-    <p>Sorry, but it looks like we can't find what you are looking for.</p>
-    <p>But, there's no place like <Link to="/">home</Link>.</p>
+    { content }
   </div>
 }
