@@ -16,7 +16,7 @@ import FilterInput from '../FilterInput'
 import LoadingSpinner from '../LoadingSpinner'
 import ReviewablePreview from '../ReviewablePreview'
 
-const reviewablesPerPage = 2
+const reviewablesPerPage = 10
 
 const baseReviewablesQuery = query(
   collection(db, 'reviewables'),
@@ -44,6 +44,7 @@ const getReviewableIfValid = (
 export default function ReviewableList () {
   const [reviewables, setReviewables] = useState<Reviewable[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  // Undefined means we haven't gotten any yet, or there are none left.
   const [lastReviewable, setLastReviewable] =
     useState<QueryDocumentSnapshot<unknown>>()
   const [filterString, setFilterString] = useState('')
@@ -133,6 +134,13 @@ export default function ReviewableList () {
           />
         })
     }
-    {isLoading && <LoadingSpinner />}
+    {/*
+      We could get a bunch but have none display because of a filter, we don't
+      want the loading bar to flicker on and off if that happens, so, whilst we
+      didn't get nothing last time (i.e. there might still be more to load), we
+      show the loading spinner. If the user sees it we should be triggering
+      loading anyway.
+    */}
+    {(isLoading || lastReviewable !== undefined) && <LoadingSpinner />}
   </div>
 }
