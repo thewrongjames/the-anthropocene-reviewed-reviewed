@@ -25,9 +25,9 @@ export default function App () {
               </Link>
             </h1>
             <p>
-              An unofficial website in which you can review different facets of
-              podcast episodes (or of a book) in which John Green reviews
-              different facets of the human-centred world.
+            An unofficial website on which you can review difference facets of a
+            podcast and book, in which John Green reviews different facets of
+            the human-centred world on a five star scale, on a five star scale.
             </p>
             <p><Link to="/">Home</Link> | <Link to="/about">About</Link></p>
           </div>
