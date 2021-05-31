@@ -4,13 +4,29 @@ Hopefully this will eventually be the source for a website where you review
 different episodes of a podcast where John Green reviews different aspects of
 the human-centred planet on a five star scale.
 
+## Local Development
+
+Start the react-scripts dev app with:
+
+```bash
+cd website
+npm start
+```
+
+Start the firestore emulator with:
+
+```bash
+firebase emulators:start --only firestore
+```
+
 ## TODO
 
-- Delete the firebase functions, I don't think I actually need them?
-  - Oh, actually, I might need them for summarising review data for better less reads.
-  - Oh also for CAPTCHA, reCAPTCHA, hCAPTCHA, something to reduce spamability.
-  - Okay, no, they cost money. Let's stick to free and totally spamable.
-  - Guess that means no summaries. Oh well. That's fine for an MVP.
+- If I decide to pay for firebase functions:
+  - Move summarisation there.
+  - Implement some kind of CAPTCHA / reCAPTCHA / hCAPTCHA.
 - Update `App.test.tsx` to at least function.
 - Probably change to `npm ci` rather than `npm install` in github action.
 - Develop a proper way to toggle emulator use.
+- Set CSP headers on hosting as strict as possible.
+- Add open graph protocol and twitter cards stuff.
+- Add tests for the firestore rules.

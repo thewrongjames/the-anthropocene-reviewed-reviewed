@@ -20,6 +20,8 @@ export default function ReviewableOr404 ({ reviewing }: Props) {
 
   useEffect(
     () => {
+      setIsLoading(true)
+
       getDoc(doc(db, 'reviewables', guid)).then(documentSnapshot => {
         if (!documentSnapshot.exists()) {
           setReviewable(undefined)
@@ -35,7 +37,7 @@ export default function ReviewableOr404 ({ reviewing }: Props) {
           // The parse failed for some reason, log the error, but otherwise
           // just move on for now unfortunately.
           console.error(
-            'ReviewableOr404 failed to parse firestore reviewable:',
+            'ReviewableOr404 failed to parse firestore Reviewable:',
             error.message
           )
           setReviewable(undefined)
@@ -44,7 +46,7 @@ export default function ReviewableOr404 ({ reviewing }: Props) {
         setIsLoading(false)
       })
     },
-    [guid]
+    [guid, reviewing]
   )
 
   let content = <NotFound />

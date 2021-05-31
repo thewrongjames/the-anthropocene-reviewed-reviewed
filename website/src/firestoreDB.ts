@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
-// import { useFirestoreEmulator } from 'firebase/firestore'
+// import { getFirestore, useFirestoreEmulator } from 'firebase/firestore'
 
 // Setup firebase
 initializeApp({

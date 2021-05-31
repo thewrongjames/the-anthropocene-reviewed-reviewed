@@ -7,12 +7,55 @@ service cloud.firestore {
 
     match /reviewables/{guid} {
       allow read: if true;
+      allow update: if
+        // Must contain exactly the desired properties, and they must have
+        // exactly the desired types. Unfortunately it seems that it always adds
+        // all of them, so I'll need to check that most of them don't change.
+        
+        // The ones we actually care about here, and may allow to be updated.
+        request.resource.data.lastAddedReviewID is string
+        && request.resource.data.numberOfReviews is number
+        && request.resource.data.starRatingTotal is number
+
+        // The ones we don't want to change must be equal to what is already in
+        // there.
+        && request.resource.data.guid == resource.data.guid
+        && request.resource.data.title == resource.data.title
+        && request.resource.data.dateOfPublication
+          == resource.data.dateOfPublication
+        && request.resource.data.description == resource.data.description
+        && request.resource.data.url == resource.data.url
+        && request.resource.data.imageURL == resource.data.imageURL
+
+        // Ensure no additional fields are being added.
+        && request.resource.data.size() == 9
+
+        // The added review must be created in a transaction with this change.
+        && !exists(/databases/$(database)/documents/reviews/$(
+          request.resource.data.lastAddedReviewID
+        ))
+        && existsAfter(/databases/$(database)/documents/reviews/$(
+          request.resource.data.lastAddedReviewID
+        ))
+
+        // The number of reviews must be incremented by 1.
+        && request.resource.data.numberOfReviews
+          == resource.data.numberOfReviews + 1
+
+        // The new total star rating must be the sum of the old one and the new
+        // rating.
+        && request.resource.data.starRatingTotal == (
+          getAfter(/databases/$(database)/documents/reviews/$(
+          request.resource.data.lastAddedReviewID
+          )).data.starRating
+          + resource.data.starRatingTotal
+        )
     }
 
     match /reviews/{id} {
       allow read: if true;
       allow create: if
-      	// Must contain only exactly the desired properties, and they must have
+      	// Must contain exactly the desired properties, and they must have
         // exactly the desired types.
       	request.resource.data.name is string
         && request.resource.data.starRating is number
@@ -42,7 +85,7 @@ service cloud.firestore {
         // reviewableGUID must be refer to an existing reviewable.
         && exists(/databases/$(database)/documents/reviewables/$(
           request.resource.data.reviewableGUID
-        ))
+        ));
     }
   }
 }

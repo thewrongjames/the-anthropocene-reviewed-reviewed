@@ -1,5 +1,6 @@
 {
   "name": "functions",
+  "author": "James Wright",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",

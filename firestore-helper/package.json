@@ -1,0 +1,15 @@
+{
+  "name": "firestore-helper",
+  "private": true,
+  "scripts": {
+    "add-podcasts": "node addPodcasts.js",
+    "add-podcasts-dev": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\" && node addPodcasts.js",
+    "update-summaries": "node updateSummaries.js",
+    "update-summaries-dev": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\" && node updateSummaries.js"
+  },
+  "author": "James Wright",
+  "dependencies": {
+    "firebase-admin": "^9.8.0",
+    "rss-parser": "^3.12.0"
+  }
+}

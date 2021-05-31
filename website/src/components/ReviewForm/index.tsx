@@ -1,9 +1,10 @@
-import { addDoc, collection } from '@firebase/firestore'
+import { doc, runTransaction } from '@firebase/firestore'
 import React, { useState } from 'react'
 import { Redirect } from 'react-router'
-import db from '../../firestoreDB'
+import { v4 as uuidv4 } from 'uuid'
 
-import Reviewable from '../../models/Reviewable'
+import db from '../../firestoreDB'
+import Reviewable, { reviewableSchema } from '../../models/Reviewable'
 import StarRating from '../../models/StarRating'
 
 import Button from '../Button'
@@ -35,12 +36,48 @@ export default function ReviewForm ({ reviewable }: Props) {
     setDidError(false)
 
     try {
-      await addDoc(collection(db, 'reviews'), {
-        name,
-        starRating,
-        reviewText,
-        dateOfCreation: new Date(),
-        reviewableGUID: reviewable.guid
+      // We need to generate the new review ID on the client because we need to
+      // set it on the reviewable, so that the firestore rules can check that
+      // update to the average star rating is correct.
+      const newReviewID = uuidv4()
+
+      await runTransaction(db, async (transaction) => {
+        const reviewableReference = doc(db, 'reviewables', reviewable.guid)
+        const currentReviewableDocumentSnapshot = await transaction.get(
+          reviewableReference
+        )
+        let currentReviewable: Reviewable
+
+        try {
+          currentReviewable = reviewableSchema
+            .parse(currentReviewableDocumentSnapshot.data())
+        } catch (error) {
+          console.error(
+            'ReviewFrom failed to parse firestore Reviewable:',
+            error.message
+          )
+          throw error
+        }
+
+        await transaction.set(
+          doc(db, 'reviews', newReviewID),
+          {
+            name,
+            starRating,
+            reviewText,
+            dateOfCreation: new Date(),
+            reviewableGUID: reviewable.guid
+          }
+        )
+
+        await transaction.update(
+          reviewableReference,
+          {
+            numberOfReviews: currentReviewable.numberOfReviews + 1,
+            starRatingTotal: currentReviewable.starRatingTotal + starRating,
+            lastAddedReviewID: newReviewID
+          }
+        )
       })
       setShouldRedirect(true)
     } catch (error) {

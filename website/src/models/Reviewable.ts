@@ -12,7 +12,9 @@ export const reviewableSchema = z.object({
   }).transform(({ seconds }) => new Date(seconds * 1000)),
   description: z.string(), // item.itunes.summary
   url: z.string(), // item.link
-  imageURL: z.string() // item.itunes.image || feed.image.url
+  imageURL: z.string(), // item.itunes.image || feed.image.url
+  numberOfReviews: z.number(),
+  starRatingTotal: z.number()
 })
 
 export default interface Reviewable extends z.infer<typeof reviewableSchema> {}

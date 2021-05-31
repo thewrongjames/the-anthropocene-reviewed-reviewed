@@ -6,9 +6,9 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 })
 const db = admin.firestore()
-const parser = new Parser();
+const parser = new Parser()
 
-(async () => {
+;(async () => {
   const snapshot = await db.collection('reviewables').get()
   const existingReviewables = {}
   snapshot.forEach(doc => {
@@ -30,7 +30,9 @@ const parser = new Parser();
       dateOfPublication: new Date(item.pubDate),
       description: item.itunes.summary,
       url: item.link,
-      imageURL: item.itunes.image || feed.image.url
+      imageURL: item.itunes.image || feed.image.url,
+      numberOfReviews: 0,
+      starRatingTotal: 0
     }
 
     // If the podcast has already been added, we don't need to add it.
